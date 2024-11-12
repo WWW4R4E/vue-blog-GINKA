@@ -10,11 +10,6 @@
                         <li v-for="link in externalLinks" :key="link.text">
                             <a :href="link.href">{{ link.text }}</a>
                         </li>
-                        <li class="dropdown">
-                            <div class="dropdown-menu">
-                                <a v-for="drop in dropdownLinks" :key="drop.text" :href="drop.href">{{ drop.text }}</a>
-                            </div>
-                        </li>
                     </ul>
                 </nav>
             </div>

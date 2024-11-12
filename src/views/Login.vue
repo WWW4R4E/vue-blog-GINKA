@@ -1,5 +1,5 @@
 <script>
-import Person from "@/components/Person.vue"; // 修正拼写错误
+import Person from "@/components/Prove.vue"; // 修正拼写错误
 import { defineComponent } from "vue";
 
 export default defineComponent({

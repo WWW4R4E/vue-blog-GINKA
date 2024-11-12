@@ -1,8 +1,6 @@
 <template>
   <div class="login-box">
     <h2>Login</h2>
-    <!-- 显示通知信息 -->
-    <Message v-if="message" :message="message" :type="type" />
     <form @submit.prevent="login">
       <div class="input-group">
         <label for="username">Username:</label>
@@ -21,21 +19,17 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import Message from './Message.vue';
 
 // 表单数据
 const username = ref('');
 const password = ref('');
-const message = ref('');  // 用于存储通知信息
-const type = ref('');      // 用于存储通知类型
 const router = useRouter();
 const store = useStore();
 
 // 登录方法
 async function login() {
   if (!username.value || !password.value) {
-    message.value = '请输入用户名和密码！';
-    type.value = 'error';
+    store.commit('setMessage', { message: '请输入用户名和密码！', type: 'error' });
     return;
   }
 
@@ -52,16 +46,15 @@ async function login() {
     });
 
     if (response.ok) {
-      store.commit('setMessage', { message: '登录成功！', type: 'success' });
+      store.commit('setMessage', { message: '登录成功！', type: 'success' , duration: 2000});
+      store.commit('setAuthentication', true); // 更新登录状态
       router.push('/home');
     } else {
       const errorResponse = await response.json();
-      message.value = `登录失败：${errorResponse.message || '请检查用户名和密码！'}`;
-      type.value = 'error';
+      store.commit('setMessage', { message: `登录失败：${errorResponse.message || '请检查用户名和密码！'}`, type: 'error' , duration: 2000});
     }
   } catch (error) {
-    message.value = '登录失败，请检查网络连接！';
-    type.value = 'error';
+    store.commit('setMessage', { message: '登录失败，请检查网络连接！', type: 'error' , duration: 2000});
     console.error(error);
   }
 }

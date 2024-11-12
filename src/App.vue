@@ -1,14 +1,21 @@
 <template>
   <div id="app">
+    <Message class="message" :message="message" :type="type" />
     <router-view id="router-view"></router-view>
   </div>
 </template>
 
-<script>
+<script setup>
+import Message from './components/Message.vue';
+import { useStore } from 'vuex'; 
+import { useRouter } from 'vue-router'; 
+import { computed } from 'vue'; 
 
-export default {
-  name: 'App'
-};
+const router = useRouter(); 
+const store = useStore();
+
+const message = computed(() => store.state.message);
+const type = computed(() => store.state.type);
 </script>
 
 <style>
@@ -18,7 +25,17 @@ div#app {
   position: relative;
   height: 100vh;
 }
-
+div.message {
+    position: absolute; /* 确保定位是正确的 */
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* 水平居中 */
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 80%; /* 设置一个特定的宽度 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
 
 div.login {
   position: absolute;
@@ -35,5 +52,4 @@ div.blog-home {
   height: 100vh;
 
   background-color: bisque;
-}
-</style>
+}</style>

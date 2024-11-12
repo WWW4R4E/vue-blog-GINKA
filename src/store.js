@@ -13,6 +13,9 @@ const store = createStore({
     clearMessage(state) {
       state.message = '';
       state.type = '';
+    },
+    setAuthentication(state, status) {
+      state.isAuthenticated = status;
     }
   }
 });
