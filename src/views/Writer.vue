@@ -2,7 +2,7 @@
     <div class="writer">
         <div class="preview">
             <h2>预览</h2>
-            <div v-html="renderedContent"></div>
+            <div class="content" v-html="renderedContent"></div>
         </div>
         <ToolBar />
         <div class="InputLike">
@@ -10,24 +10,31 @@
         </div>
         <div class="publishSettings">
             <label class="publishLabel"> 字数：{{ content.length }} </label>
-            <button @click="handleSubmit">提交</button>
-            <button @click="handleSaveDraft">保存草稿</button>
+            <button @click="handleSubmit" class="publishButton">提交</button>
         </div>
     </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
-import { marked } from 'marked';
+import MarkdownIt from 'markdown-it';
+import markdownItHighlightjs from 'markdown-it-highlightjs';
 import ToolBar from '@/components/ToolBar.vue';
+import 'highlight.js/styles/github.css'; // 引入高亮主题
+
+// 创建 Markdown-it 实例
+const md = new MarkdownIt().use(markdownItHighlightjs);
 
 // 使用 ref 创建响应式数据
 const content = ref('');  // 存储输入的 Markdown 内容
 
 // 计算属性，转换 Markdown 内容为 HTML
 const renderedContent = computed(() => {
+    if (!content.value.trim()) {
+        return "<p>内容为空，请输入内容。</p>";  // 提示用户输入内容
+    }
     try {
-        return marked(content.value);  // 将 Markdown 内容转换为 HTML
+        return md.render(content.value);  // 使用 markdown-it 渲染内容
     } catch (error) {
         console.error("Markdown 转换出错:", error);
         return "<p>内容转换出错，请检查您的输入。</p>";  // 错误处理
@@ -36,8 +43,7 @@ const renderedContent = computed(() => {
 
 // 提交处理
 function handleSubmit() {
-    // 提交逻辑
-    if (content.value.trim() === '') {
+    if (!validateContent(content.value)) {
         alert('内容不能为空！');
         return;
     }
@@ -45,9 +51,14 @@ function handleSubmit() {
     console.log("提交内容:", content.value);
 }
 
+// 内容验证函数
+function validateContent(content) {
+    return content.trim() !== '';
+}
+
 // 保存草稿处理
 function handleSaveDraft() {
-    if (content.value.trim() === '') {
+    if (!validateContent(content.value)) {
         alert('内容不能为空，无法保存草稿！');
         return;
     }
@@ -60,45 +71,63 @@ function handleSaveDraft() {
 .writer {
     width: 80%;
     margin: 0 auto;
-    /* 确保居中显示 */
-    border: 1px solid #ccc;
 }
 
-.writer>* {
+h2 {
+    color: #fff;
+    background-color: #1f283e;
+    padding: 2px;
     margin: 0;
-    /* 去掉默认间隙 */
-    padding: 0;
-    /* 也去掉内边距 */
+    text-align: center;
+}
+
+.content {
+    padding: 20px;
+    width: 100%;
+    height: 50dvh; /* 确保添加分号 */
 }
 
 .InputLike {
-    width: 100%; /* 占满总宽度 */
-    height: 400px; /* 根据需要设置合适的高度 */
-    display: flex;
+    width: 100%;
+    height: 200px;
 }
 
 .Editable-content {
-    width: 100%; /* 占满父容器宽度 */
-    height: 100%; /* 占满父容器高度 */
-    resize: none; /* 不允许调整大小 */
-    padding: 10px; /* 内边距 */
-    border: 1px solid #ccc; /* 边框样式 */
+    width: 100%;
+    height: 100%;
+    resize: none;
+    padding: 10px;
+    border: 0;
+}
+
+textarea:focus {
+    outline: none;
 }
 
 .preview {
-    margin-top: 20px;
-    background-color: #ffffff;
+    background-color: #181a1b;
 }
 
 .publishSettings {
     display: flex;
     justify-content: flex-end;
     align-items: stretch;
+    background-color: #1b1e1f;
+    height: 40px;
 }
 
 .publishLabel {
-    margin-right: 10px;
+    height: 100%;
     width: 100px;
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.publishButton {
+    border-radius: 0;
+    color: lightslategrey;
+    background-color: #1f283e;
+} 
 </style>

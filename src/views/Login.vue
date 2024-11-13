@@ -1,9 +1,9 @@
 <script>
-import Person from "@/components/Prove.vue"; // 修正拼写错误
+import Person from "@/components/Prove.vue"; 
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    components: { Person }  // 修正拼写错误
+    components: { Person }  
 })
 </script>
 
@@ -12,11 +12,11 @@ export default defineComponent({
         <Person />
     </div>
 </template>
-<style>
-body {
-    align-items: center;
-    background-image: url("../assets/background.png"); /* 使用 url() 函数 */
-    background-size: cover; /* 让背景图像覆盖整个区域 */
-    background-repeat: no-repeat; /* 防止背景图像重复 */
+<style scoped>
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    backdrop-filter: blur(5px); /* 模糊效果 */
 }
 </style>

@@ -74,7 +74,6 @@ const logout = () => {
 </script>
 
 <style>
-/* 保留原样式 */
 .blog-home {
     padding: 20px;
 }
