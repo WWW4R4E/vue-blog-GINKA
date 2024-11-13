@@ -6,7 +6,7 @@
 </template>
 <script setup>
 import { useStore } from 'vuex';
-import { ref, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 const store = useStore();
 // props 的定义
 const props = defineProps({
@@ -26,25 +26,20 @@ const props = defineProps({
 const close = () => {
   store.commit('setMessage', { message: '', type: '' });
 };
-// // 使用 onMounted 钩子来确保组件挂载后执行
-// onMounted(() => {
-//   // 如果 duration 大于 0，则设置一个定时器来自动关闭消息
-//   if (props.duration > 0) {
-//     setTimeout(close, props.duration);
-//   }
-// });
+
+onMounted(() => {
+  if (props.duration > 0) {
+    setTimeout(close, props.duration);
+  }
+});
 
 </script>
 
 <style scoped>
 .message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
   padding: 10px;
   border-radius: 5px;
   color: white;
-  z-index: 1000;
 }
 .message.info {
   background-color: blue;

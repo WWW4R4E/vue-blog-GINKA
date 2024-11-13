@@ -5,6 +5,8 @@ import Post from '../views/Post.vue';
 import About from '../views/About.vue'; 
 import Contact from '../views/Contact.vue'; 
 import Comments from '../views/Comments.vue';
+import NotFound from '../views/NotFound.vue'; 
+import Writer from '../views/Writer.vue';
 import { useStore } from 'vuex'; // 导入 Vuex store
 
 const routes = [
@@ -41,7 +43,12 @@ const routes = [
   {
     path: '/:catchAll(.*)',
     name: 'NotFound',
-    component: () => import('../views/NotFound.vue') // 404页面
+    component: NotFound
+  },
+  {
+    path: '/writer',
+    name: 'Writer',
+    component: Writer
   }
 ];
 

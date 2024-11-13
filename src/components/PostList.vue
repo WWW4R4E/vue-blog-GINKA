@@ -4,6 +4,7 @@
       <li v-for="post in localPosts" :key="post.id">
         <h3>{{ post.title }}</h3>
         <p>{{ post.summary }}</p>
+        <a href="/post/{{ post.id }}">阅读全文</a>
       </li>
     </ul>
   </div>

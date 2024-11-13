@@ -48,6 +48,7 @@ const navLinks = [
     { text: '设置', to: '/settings' },
     { text: '正文', to: '/contact' },
     { text: '评论', to: '/comments' },
+    { text: '新建', to: '/writer'}
 ];
 
 

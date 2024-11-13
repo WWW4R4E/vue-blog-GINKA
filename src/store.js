@@ -3,7 +3,8 @@ import { createStore } from 'vuex';
 const store = createStore({
   state: {
     message: '',
-    type: ''
+    type: '',
+    isAuthenticated: true, // 后端开了的情况下需要为false
   },
   mutations: {
     setMessage(state, payload) {
@@ -17,7 +18,7 @@ const store = createStore({
     setAuthentication(state, status) {
       state.isAuthenticated = status;
     }
-  }
+  },
 });
 
 export default store;
