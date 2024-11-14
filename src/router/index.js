@@ -7,7 +7,8 @@ import Contact from '../views/Contact.vue';
 import Comments from '../views/Comments.vue';
 import NotFound from '../views/NotFound.vue'; 
 import Writer from '../views/Writer.vue';
-import { useStore } from 'vuex'; // 导入 Vuex store
+import User from '@/views/User.vue';
+import { useStore } from 'vuex'; 
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     path: '/writer',
     name: 'Writer',
     component: Writer
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User
   }
 ];
 

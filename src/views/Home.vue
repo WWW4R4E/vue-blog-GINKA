@@ -4,7 +4,7 @@
             <div id="top_nav" class="navbar border-none">
                 <nav id="nav_main" class="navbar-main">
                     <ul id="nav_left" class="navbar-list navbar-left">
-                            <a title="嗨喽" role="banner">
+                            <a title="嗨喽" role="banner" href="/user">
                                 <img class="icon" src="../assets/icon.jpg" alt="图标">
                             </a>
                         <li v-for="link in externalLinks" :key="link.text">
@@ -30,7 +30,7 @@
             <main>
                 <section>
                     <h2>文章列表</h2>
-                        <PostList/>
+                        <PostList class="post-list"/>
                 </section>
             </main>
         </div>
@@ -45,7 +45,6 @@ import PostList from '@/components/PostList.vue';
 const navLinks = [
     { text: '首页', to: '/home' },
     { text: '关于', to: '/about' },
-    { text: '设置', to: '/settings' },
     { text: '正文', to: '/contact' },
     { text: '评论', to: '/comments' },
     { text: '新建', to: '/writer'}
@@ -53,8 +52,6 @@ const navLinks = [
 
 
 const externalLinks = [
-    { text: '登录', href: 'https://cnblogs.vip/' },
-    { text: '注册', href: 'https://cnblogs.vip/store' },
     { text: '随机看文', href: 'https://www.cnblogs.com/cmt/p/18500368' },
     { text: '排行榜', href: 'https://news.cnblogs.com/' },
     { text: '收藏', href: 'https://q.cnblogs.com/' },
@@ -134,6 +131,16 @@ main {
     flex: 1;
 }
 
+a {
+    color: initial; 
+}
+a:hover {
+    color: initial;
+}
+a:visited {
+    color: initial; 
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -191,6 +198,10 @@ p {
 
 .dropdown:hover .dropdown-menu {
     display: block; /* 在悬停时显示下拉菜单 */
+}
+
+.post-list {
+    margin: 10px 15px;
 }
 
 </style>
