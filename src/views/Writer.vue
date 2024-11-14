@@ -31,7 +31,7 @@ const content = ref('');  // 存储输入的 Markdown 内容
 // 计算属性，转换 Markdown 内容为 HTML
 const renderedContent = computed(() => {
     if (!content.value.trim()) {
-        return "<p>内容为空，请输入内容。</p>";  // 提示用户输入内容
+        return "<p style='color: rgb(209, 209, 209);'>内容为空，请输入内容。</p>";  // 提示用户输入内容
     }
     try {
         return md.render(content.value);  // 使用 markdown-it 渲染内容
@@ -98,6 +98,8 @@ h2 {
     resize: none;
     padding: 10px;
     border: 0;
+    /* background-color: #000; */
+    color-scheme: dark !important;
 }
 
 textarea:focus {

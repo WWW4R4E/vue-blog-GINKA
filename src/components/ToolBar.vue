@@ -187,6 +187,8 @@ export default {
     /* 确保宽度为 100% */
     background-color: #1c2123;
     justify-content: space-between;
+    overflow: auto;
+    scrollbar-color: #454a4d #202324;
 }
 
 .toolbar-button {
@@ -195,12 +197,10 @@ export default {
     justify-content: center;
     flex-direction: column;
     height: auto;
-    width: 54px;
-    margin-left: 4px;
-    margin-right: 4px;
-    color: #000;
+    width: 64px;
     border-radius: 0;
-    background-color: #fff;
+    color: rgb(232, 230, 227);
+    background-color: rgb(24, 26, 27);
 }
 
 .toolbar-divider {
@@ -208,6 +208,7 @@ export default {
     width: 4px;
     background-color: black;
     border: 0px;
+    
 }
 
 .toolbar-section {
